@@ -63,4 +63,31 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody();
     }
+
+    // ✅ Spring Security 인증용 메서드들
+    public Long getUserId(String token) {
+        return Long.valueOf(extractClaims(token).getSubject());
+    }
+
+    public String getEmail(String token) {
+        return extractClaims(token).get("email", String.class);
+    }
+
+    public String getNickname(String token) {
+        return extractClaims(token).get("nickName", String.class);
+    }
+
+    public String getRole(String token) {
+        return extractClaims(token).get("userRole", String.class);
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            extractClaims(token); // 유효하면 예외 없음
+            return true;
+        } catch (Exception e) {
+            log.warn("Invalid JWT token: {}", e.getMessage());
+            return false;
+        }
+    }
 }
