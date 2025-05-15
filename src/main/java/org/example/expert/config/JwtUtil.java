@@ -64,7 +64,6 @@ public class JwtUtil {
                 .getBody();
     }
 
-    // ✅ Spring Security 인증용 메서드들
     public Long getUserId(String token) {
         return Long.valueOf(extractClaims(token).getSubject());
     }
@@ -83,7 +82,7 @@ public class JwtUtil {
 
     public boolean validateToken(String token) {
         try {
-            extractClaims(token); // 유효하면 예외 없음
+            extractClaims(token);
             return true;
         } catch (Exception e) {
             log.warn("Invalid JWT token: {}", e.getMessage());

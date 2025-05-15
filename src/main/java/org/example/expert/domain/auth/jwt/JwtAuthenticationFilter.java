@@ -49,7 +49,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             } catch (Exception e) {
                 log.error("JWT 인증 실패: {}", e.getMessage());
-                // 인증 실패 시에도 필터는 계속 진행해야 함 (예: permitAll 경로)
                 SecurityContextHolder.clearContext();
             }
         }
